@@ -1,0 +1,24 @@
+.logo {
+  width: 136px;
+}
+.navWrapper {
+  max-width: 724px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+
+.link {
+  font-weight: 500;
+}
+
+.active {
+  color: var(--button-hover);
+}

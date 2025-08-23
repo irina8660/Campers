@@ -1,0 +1,9 @@
+.heart {
+  fill: black;
+  stroke: none;
+  transition: var(--transition);
+}
+
+.heart.active {
+  fill: #e44848;
+}

@@ -1,0 +1,30 @@
+.wrapper {
+  padding: 48px 0;
+  display: flex;
+  flex-direction: row;
+  gap: 64px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+.loadMore {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  border: 1px solid var(--button);
+  background-color: transparent;
+  color: var(--button);
+  border-radius: 28px;
+  width: 166px;
+  height: 56px;
+
+  &:hover,
+  &:focus {
+    border: 1px solid var(--button-hover);
+  }
+}

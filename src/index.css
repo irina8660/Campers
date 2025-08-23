@@ -31,7 +31,7 @@
   --main-color: #101828;
   --text-color: #475467;
   --gray: #6c717b;
-  --loght-gray: #dadde1;
+  --light-gray: #dadde1;
   --button: #e44848;
   --button-hover: #d84343;
   --rating: #ffc531;
@@ -45,6 +45,7 @@
 * {
   box-sizing: border-box;
   scroll-behavior: smooth;
+  padding: 0;
 }
 
 body {
@@ -56,7 +57,9 @@ body {
 }
 
 button {
+  outline: none;
   cursor: pointer;
+  background-color: transparent;
   transition: var(--transition);
 }
 
@@ -64,6 +67,11 @@ a {
   cursor: pointer;
   text-decoration: none;
   transition: var(--transition);
+}
+
+input {
+  transition: var(--transition);
+  cursor: pointer;
 }
 
 /*Reset*/

@@ -12,8 +12,10 @@ const favoritesSlice = createSlice({
       const id = action.payload;
       if (state.ids.includes(id)) {
         state.ids = state.ids.filter((favId) => favId !== id);
+        console.log('🔻 Removed from favorites:', id);
       } else {
         state.ids.push(id);
+        console.log('🔺 Added to favorites:', id);
       }
     },
   },

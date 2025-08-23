@@ -17,12 +17,17 @@ const filtersSlice = createSlice({
       state.form = action.payload;
     },
     toggleEquipment: (state, action) => {
-      const option = action.payload;
-      if (state.equipment.includes(option)) {
-        state.equipment = state.equipment.filter((item) => item !== option);
+      const key = action.payload;
+
+      if (state.equipment.includes(key)) {
+        state.equipment = state.equipment.filter((item) => item !== key);
+        console.log(`🔻 Removed filter: ${key}`);
       } else {
-        state.equipment.push(option);
+        state.equipment.push(key);
+        console.log(`🔺 Added filter: ${key}`);
       }
+
+      console.log('🧾 Current filters:', [...state.equipment]);
     },
     resetFilters: (state) => {
       state.location = '';

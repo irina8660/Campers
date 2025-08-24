@@ -7,6 +7,7 @@ import { fetchCampers } from '../../redux/campers/operations';
 import {
   selectCampers,
   selectHasNextPage,
+  selectIsLoading,
   selectLimit,
   selectPage,
 } from '../../redux/campers/selectors';
@@ -19,12 +20,27 @@ const CatalogPage = () => {
   const filters = useSelector(selectFilters);
   const campers = useSelector(selectCampers);
 
+  const isLoading = useSelector(selectIsLoading);
+
   const page = useSelector(selectPage);
   const limit = useSelector(selectLimit);
   const hasNextPage = useSelector(selectHasNextPage);
 
   useEffect(() => {
-    dispatch(fetchCampers({ filters, page, limit }));
+    const filtersToSend = {
+      location: filters.location,
+      form: filters.form,
+    };
+
+    filters.equipment?.forEach((key) => {
+      if (key === 'transmission') {
+        filtersToSend.transmission = 'automatic';
+      } else {
+        filtersToSend[key] = true;
+      }
+    });
+
+    dispatch(fetchCampers({ filters: filtersToSend, page, limit }));
   }, [dispatch, filters, page, limit]);
 
   const handleLoadMore = () => {
@@ -38,7 +54,7 @@ const CatalogPage = () => {
       </div>
       <div className={s.list}>
         <CampersList campers={campers} />
-        {hasNextPage && (
+        {hasNextPage && !isLoading && (
           <button className={s.loadMore} onClick={handleLoadMore}>
             Load more
           </button>

@@ -5,6 +5,27 @@
   padding: 48px 0;
 }
 
+.goBackLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: self-start;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  border: 1px solid var(--button);
+  background-color: transparent;
+  color: var(--button);
+  border-radius: 28px;
+  width: 166px;
+  height: 56px;
+}
+
+.goBackLink:hover,
+.goBackLink:focus {
+  border: 1px solid var(--button-hover);
+  outline: none;
+}
+
 .header {
   display: flex;
   flex-direction: column;

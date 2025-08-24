@@ -1,14 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchCampers, fetchCamperById } from './operations';
 
-const handlePending = (state) => {
-  state.error = null;
-};
-
-const handleRejected = (state, action) => {
-  state.error = action.payload;
-};
-
 const initialState = {
   items: [],
   current: null,
@@ -16,6 +8,7 @@ const initialState = {
   page: 1,
   limit: 4,
   hasNextPage: false,
+  isLoading: false,
 };
 
 const campersSlice = createSlice({
@@ -27,30 +20,44 @@ const campersSlice = createSlice({
     },
     clearItems: (state) => {
       state.items = [];
-      state.showItems = [];
       state.page = 1;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchCampers.pending, handlePending)
+      .addCase(fetchCampers.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
       .addCase(fetchCampers.fulfilled, (state, action) => {
-        const { items, total } = action.payload;
+        const { items, total, page } = action.payload;
+        state.isLoading = false;
 
-        if (state.page === 1) {
+        if (page === 1) {
           state.items = items;
         } else {
           state.items = [...state.items, ...items];
         }
+
         state.total = total;
-        state.hasNextPage = state.page * state.limit < total;
+        state.hasNextPage = page * state.limit < total;
       })
-      .addCase(fetchCampers.rejected, handleRejected)
-      .addCase(fetchCamperById.pending, handlePending)
+      .addCase(fetchCampers.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(fetchCamperById.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
       .addCase(fetchCamperById.fulfilled, (state, action) => {
+        state.isLoading = false;
         state.current = action.payload;
       })
-      .addCase(fetchCamperById.rejected, handleRejected);
+      .addCase(fetchCamperById.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
   },
 });
 

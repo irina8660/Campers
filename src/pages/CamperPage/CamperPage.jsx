@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useParams } from 'react-router';
+import { Link, NavLink, Outlet, useParams } from 'react-router';
 import s from './CamperPage.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -13,8 +13,6 @@ const CamperPage = () => {
   const { id } = useParams();
   const camper = useSelector(selectCurrentCamper);
 
-  console.log(camper);
-
   useEffect(() => {
     dispatch(fetchCamperById(id));
   }, [dispatch, id]);
@@ -26,6 +24,13 @@ const CamperPage = () => {
 
   return (
     <div className={s.wrapper}>
+      <Link
+        className={s.goBackLink}
+        to="/catalog
+      "
+      >
+        Go to catalog
+      </Link>
       <div className={s.header}>
         <h2 className={s.name}>{name}</h2>
         <InfoItem rating={rating} reviews={reviews} location={location} />

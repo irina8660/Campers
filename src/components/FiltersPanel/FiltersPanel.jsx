@@ -1,29 +1,34 @@
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  toggleEquipment,
-  setForm,
-  resetFilters,
-} from '../../redux/filters/slice';
-import {
-  selectEquipment,
-  selectFilters,
-  selectForm,
-} from '../../redux/filters/selectors';
+import { selectFilters } from '../../redux/filters/selectors';
+import { setFilters, resetFilters } from '../../redux/filters/slice';
+import { clearItems, setPage } from '../../redux/campers/slice';
+import { fetchCampers } from '../../redux/campers/operations';
 import clsx from 'clsx';
 import s from './FiltersPanel.module.css';
 import { useEffect, useRef, useState } from 'react';
-import { clearItems, setPage } from '../../redux/campers/slice';
-import { fetchCampers } from '../../redux/campers/operations';
 
 const FiltersPanel = () => {
+  const dispatch = useDispatch();
+  const reduxFilters = useSelector(selectFilters);
+
+  const [localFilters, setLocalFilters] = useState({
+    location: '',
+    form: '',
+    equipment: [],
+  });
+
   const [showMore, setShowMore] = useState(false);
   const [maxHeight, setMaxHeight] = useState('208px');
   const equipmentWrapperRef = useRef(null);
 
-  const dispatch = useDispatch();
-  const equipment = useSelector(selectEquipment);
-  const form = useSelector(selectForm);
-  const filters = useSelector(selectFilters);
+  useEffect(() => {
+    setLocalFilters(reduxFilters);
+  }, [reduxFilters]);
+
+  useEffect(() => {
+    const scrollHeight = equipmentWrapperRef.current?.scrollHeight ?? 0;
+    setMaxHeight(showMore ? `${scrollHeight}px` : '208px');
+  }, [showMore]);
 
   const allEquipmentOptions = [
     { key: 'transmission', label: 'Automatic', icon: 'transmission' },
@@ -44,29 +49,36 @@ const FiltersPanel = () => {
     { key: 'alcove', label: 'Alcove', icon: 'alcove' },
   ];
 
-  useEffect(() => {
-    const scrollHeight = equipmentWrapperRef.current?.scrollHeight ?? 0;
-    setMaxHeight(showMore ? `${scrollHeight}px` : '208px');
-  }, [showMore]);
+  const toggleEquipment = (key) => {
+    setLocalFilters((prev) => ({
+      ...prev,
+      equipment: prev.equipment.includes(key)
+        ? prev.equipment.filter((item) => item !== key)
+        : [...prev.equipment, key],
+    }));
+  };
 
   const handleSearch = () => {
+    dispatch(setFilters(localFilters));
     dispatch(clearItems());
     dispatch(setPage(1));
 
     const filtersToSend = {
-      location: filters.location,
-      form: filters.form,
+      location: localFilters.location,
+      form: localFilters.form,
     };
 
-    filters.equipment.forEach((item) => {
-      if (item === 'transmission') {
+    localFilters.equipment.forEach((key) => {
+      if (key === 'transmission') {
         filtersToSend.transmission = 'automatic';
       } else {
-        filtersToSend[item] = true;
+        filtersToSend[key] = true;
       }
     });
 
-    dispatch(fetchCampers(filtersToSend));
+    console.log('📦 Normalized filters:', filtersToSend);
+
+    dispatch(fetchCampers({ filters: filtersToSend, page: 1, limit: 4 }));
   };
 
   const handleReset = () => {
@@ -87,6 +99,13 @@ const FiltersPanel = () => {
             placeholder="City"
             className={s.locationInput}
             type="text"
+            value={localFilters.location}
+            onChange={(e) =>
+              setLocalFilters((prev) => ({
+                ...prev,
+                location: e.target.value,
+              }))
+            }
             aria-label="Enter location"
           />
         </div>
@@ -107,11 +126,10 @@ const FiltersPanel = () => {
                   <button
                     key={key}
                     className={clsx(s.filterItem, {
-                      [s.active]: equipment.includes(key),
+                      [s.active]: localFilters.equipment.includes(key),
                     })}
                     type="button"
-                    onClick={() => dispatch(toggleEquipment(key))}
-                    aria-label={`Toggle ${label} filter`}
+                    onClick={() => toggleEquipment(key)}
                   >
                     <svg className={s.icon} width="32" height="32">
                       <title>{label}</title>
@@ -126,9 +144,6 @@ const FiltersPanel = () => {
               className={s.showMoreBtn}
               type="button"
               onClick={() => setShowMore((prev) => !prev)}
-              aria-label={
-                showMore ? 'Hide extra equipment' : 'Show more equipment'
-              }
             >
               {showMore ? 'Less...' : 'Show more...'}
             </button>
@@ -141,11 +156,12 @@ const FiltersPanel = () => {
                 <button
                   key={key}
                   className={clsx(s.filterItem, {
-                    [s.active]: form === key,
+                    [s.active]: localFilters.form === key,
                   })}
                   type="button"
-                  onClick={() => dispatch(setForm(key))}
-                  aria-label={`Set vehicle type to ${label}`}
+                  onClick={() =>
+                    setLocalFilters((prev) => ({ ...prev, form: key }))
+                  }
                 >
                   <svg className={s.icon} width="32" height="32">
                     <title>{label}</title>

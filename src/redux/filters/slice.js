@@ -18,25 +18,29 @@ const filtersSlice = createSlice({
     },
     toggleEquipment: (state, action) => {
       const key = action.payload;
-
       if (state.equipment.includes(key)) {
         state.equipment = state.equipment.filter((item) => item !== key);
-        console.log(`🔻 Removed filter: ${key}`);
       } else {
         state.equipment.push(key);
-        console.log(`🔺 Added filter: ${key}`);
       }
-
-      console.log('🧾 Current filters:', [...state.equipment]);
     },
     resetFilters: (state) => {
       state.location = '';
       state.form = '';
       state.equipment = [];
     },
+    setFilters: (state, action) => {
+      return { ...state, ...action.payload };
+    },
   },
 });
 
-export const { setLocation, setForm, toggleEquipment, resetFilters } =
-  filtersSlice.actions;
+export const {
+  setLocation,
+  setForm,
+  toggleEquipment,
+  resetFilters,
+  setFilters,
+} = filtersSlice.actions;
+
 export default filtersSlice.reducer;

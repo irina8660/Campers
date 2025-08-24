@@ -10,7 +10,7 @@ export const fetchCampers = createAsyncThunk(
 
       if (filters.location) params.append('location', filters.location);
       if (filters.form) params.append('form', filters.form);
-      if (filters.transmission)
+      if ('transmission' in filters)
         params.append('transmission', filters.transmission);
 
       Object.entries(filters).forEach(([key, value]) => {
@@ -26,6 +26,9 @@ export const fetchCampers = createAsyncThunk(
       params.append('limit', limit);
 
       const query = params.toString();
+
+      console.log('📦 Fetching campers with query:', `/campers?${query}`);
+
       const { data } = await axios.get(`/campers?${query}`);
       return {
         items: data.items,

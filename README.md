@@ -4,7 +4,7 @@
 
 ## 🔗 Live Demo
 
-- **Live site**: [https://your-project-link.vercel.app](https://your-project-link.vercel.app)
+- **Live site**: https://campers-two-gamma.vercel.app/
 - **Repository**: https://github.com/irina8660/Campers
 
 ## ⚙️ Technologies Used
@@ -47,7 +47,7 @@ The project uses a public mock API:
 - `GET /campers` – Fetch all campers
 - `GET /campers/:id` – Fetch camper details by ID
 
-API base URL: [https://66b1f8e71ca8ad33d4f5f63e.mockapi.io/campers](https://66b1f8e71ca8ad33d4f5f63e.mockapi.io/campers)
+API base URL: https://66b1f8e71ca8ad33d4f5f63e.mockapi.io/campers
 
 ## 🧠 State Management (Redux)
 

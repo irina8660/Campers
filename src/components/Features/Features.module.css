@@ -13,6 +13,7 @@
   font-weight: 600;
   font-size: 20px;
   line-height: 1.2;
+
   &:after {
     content: '';
     display: block;
@@ -37,8 +38,8 @@
 .detail {
   display: flex;
   flex-direction: row;
-  gap: 46px;
   justify-content: space-between;
+  gap: 46px;
 }
 
 .label,

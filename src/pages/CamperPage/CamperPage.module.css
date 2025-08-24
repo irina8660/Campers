@@ -9,21 +9,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  align-self: self-start;
+  align-self: flex-start;
   font-weight: 500;
   letter-spacing: -0.01em;
-  border: 1px solid var(--button);
-  background-color: transparent;
-  color: var(--button);
-  border-radius: 28px;
   width: 166px;
   height: 56px;
-}
+  border-radius: 28px;
+  color: var(--button);
+  background-color: transparent;
+  border: 1px solid var(--button);
+  transition: var(--transition);
 
-.goBackLink:hover,
-.goBackLink:focus {
-  border: 1px solid var(--button-hover);
-  outline: none;
+  &:hover,
+  &:focus {
+    border-color: var(--button-hover);
+    outline: none;
+  }
 }
 
 .header {
@@ -31,6 +32,7 @@
   flex-direction: column;
   gap: 8px;
 }
+
 .name,
 .price {
   font-weight: 600;
@@ -40,8 +42,8 @@
 
 .gallery {
   display: flex;
-  justify-content: center;
   flex-wrap: nowrap;
+  justify-content: center;
   gap: 48px;
   overflow-x: auto;
   scroll-behavior: smooth;
@@ -50,9 +52,9 @@
 .galleryItem {
   width: 292px;
   height: 312px;
+  flex-shrink: 0;
   overflow: hidden;
   border-radius: 10px;
-  flex-shrink: 0;
 }
 
 .image {
@@ -76,34 +78,34 @@
   display: flex;
   gap: 40px;
   position: relative;
-  border-bottom: 1px solid var(--light-gray);
   margin-bottom: 24px;
+  border-bottom: 1px solid var(--light-gray);
 }
 
 .link {
   position: relative;
+  padding-bottom: 24px;
   font-weight: 600;
   font-size: 20px;
   line-height: 1.2;
   color: var(--text-color);
-  padding-bottom: 24px;
-}
 
-.link::after {
-  content: '';
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  width: 100%;
-  height: 5px;
-  background-color: var(--button);
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform var(--transition);
-}
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-color: var(--button);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform var(--transition);
+  }
 
-.link.active::after {
-  transform: scaleX(1);
+  &.active::after {
+    transform: scaleX(1);
+  }
 }
 
 .tabsWrapper {

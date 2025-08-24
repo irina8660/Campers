@@ -1,7 +1,6 @@
 .hero {
   display: flex;
   align-items: flex-start;
-
   position: relative;
   left: 50%;
   right: 50%;
@@ -17,7 +16,12 @@
 
   min-height: 667px;
   aspect-ratio: 16 / 9;
+
+  @media screen and (min-resolution: 192dpi) {
+    background-image: url('/images/hero-desk@2x.webp');
+  }
 }
+
 .headerWrapper {
   height: 100%;
   display: flex;
@@ -28,6 +32,7 @@
   margin: 0 auto;
   padding: 0 64px;
 }
+
 .header {
   font-weight: 600;
   font-size: 48px;
@@ -59,13 +64,9 @@
 
   background-color: var(--button);
   border-radius: 200px;
+  transition: var(--transition);
+
   &:hover {
     background-color: var(--button-hover);
-  }
-}
-
-@media screen and (min-resolution: 192dpi) {
-  .hero {
-    background-image: url('/images/hero-desk@2x.webp');
   }
 }

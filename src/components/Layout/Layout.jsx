@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import Container from '../Container/Container';
 import Header from '../Header/Header';
 import s from './Layout.module.css';
@@ -10,9 +9,7 @@ const Layout = () => {
       <Header />
       <main>
         <Container>
-          <Suspense fallback={<div>Loading...</div>}>
-            <Outlet />
-          </Suspense>
+          <Outlet />
         </Container>
       </main>
     </div>

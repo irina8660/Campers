@@ -6,6 +6,7 @@ import { fetchCamperById } from '../../redux/campers/operations';
 import { selectCurrentCamper } from '../../redux/campers/selectors';
 import InfoItem from '../../components/InfoItem/InfoItem';
 import clsx from 'clsx';
+import BookingForm from '../../components/BookingForm/BookingForm';
 
 const CamperPage = () => {
   const dispatch = useDispatch();
@@ -66,9 +67,9 @@ const CamperPage = () => {
             </NavLink>
           </div>
         </div>
-
-        <div className={s.outlet}>
+        <div className={s.tabsWrapper}>
           <Outlet />
+          <BookingForm />
         </div>
       </div>
     </div>

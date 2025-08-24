@@ -78,8 +78,6 @@
 
   border-radius: 200px;
   background: var(--button);
-  transition: var(--transition);
-  cursor: pointer;
 }
 
 .button:hover,

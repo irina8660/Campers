@@ -1,0 +1,15 @@
+.starWrapper {
+  display: flex;
+  gap: 4px;
+}
+
+.star,
+.starEmpty {
+  width: 16px;
+  height: 16px;
+  fill: var(--rating);
+}
+
+.starEmpty {
+  fill: #e0e0e0;
+}

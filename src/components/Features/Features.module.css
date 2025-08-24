@@ -1,0 +1,49 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--inputs);
+  border-radius: 10px;
+  padding: 44px 52px;
+  width: 631px;
+  height: 588px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+  &:after {
+    content: '';
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid var(--light-gray);
+    margin-top: 24px;
+  }
+}
+
+.detailsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.detailsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.detail {
+  display: flex;
+  flex-direction: row;
+  gap: 46px;
+  justify-content: space-between;
+}
+
+.label,
+.value {
+  text-transform: capitalize;
+  font-weight: 500;
+  text-align: center;
+}

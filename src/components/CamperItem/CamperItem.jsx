@@ -2,10 +2,16 @@ import ButtonAddToFavorites from '../ButtonAddToFavorites/ButtonAddToFavorites';
 import InfoItem from '../InfoItem/InfoItem';
 import EquipmentsList from '../EquipmentsList/EquipmentsList';
 import s from './CamperItem.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const CamperItem = ({ camper }) => {
   const { id, name, price, rating, location, gallery, description, reviews } =
     camper;
+  const navigate = useNavigate();
+
+  const handleShowMore = () => {
+    navigate(`/catalog/${camper.id}`);
+  };
 
   return (
     <li className={s.item}>
@@ -45,6 +51,7 @@ const CamperItem = ({ camper }) => {
           <EquipmentsList camper={camper} />
 
           <button
+            onClick={handleShowMore}
             className={s.button}
             type="button"
             aria-label={`Show more details about ${name}`}

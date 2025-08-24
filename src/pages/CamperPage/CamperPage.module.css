@@ -1,0 +1,84 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.name,
+.price {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.33;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 48px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.galleryItem {
+  width: 292px;
+  height: 312px;
+  overflow: hidden;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.description {
+  color: var(--text-color);
+}
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.links {
+  display: flex;
+  gap: 40px;
+  position: relative;
+  border-bottom: 1px solid var(--light-gray);
+  margin-bottom: 24px;
+}
+
+.link {
+  position: relative;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--text-color);
+  padding-bottom: 24px;
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background-color: var(--button);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--transition);
+}
+
+.link.active::after {
+  transform: scaleX(1);
+}

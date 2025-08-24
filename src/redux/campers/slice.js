@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchCampers, fetchCampersById } from './operations';
+import { fetchCampers, fetchCamperById } from './operations';
 
 const handlePending = (state) => {
   state.error = null;
@@ -46,11 +46,11 @@ const campersSlice = createSlice({
         state.hasNextPage = state.page * state.limit < total;
       })
       .addCase(fetchCampers.rejected, handleRejected)
-      .addCase(fetchCampersById.pending, handlePending)
-      .addCase(fetchCampersById.fulfilled, (state, action) => {
+      .addCase(fetchCamperById.pending, handlePending)
+      .addCase(fetchCamperById.fulfilled, (state, action) => {
         state.current = action.payload;
       })
-      .addCase(fetchCampersById.rejected, handleRejected);
+      .addCase(fetchCamperById.rejected, handleRejected);
   },
 });
 

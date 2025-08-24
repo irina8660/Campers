@@ -38,7 +38,7 @@ export const fetchCampers = createAsyncThunk(
   },
 );
 
-export const fetchCampersById = createAsyncThunk(
+export const fetchCamperById = createAsyncThunk(
   'campers/fetchById',
   async (id, thunkAPI) => {
     try {

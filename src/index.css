@@ -49,7 +49,7 @@
 }
 
 body {
-  font-family: var(--text-color);
+  font-family: var(--font-family);
   line-height: var(--line-height);
   font-weight: var(--font-weight);
   font-size: var(--font-size);
